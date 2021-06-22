@@ -1,0 +1,1 @@
+SELECT model FROM (SELECT model, count, DENSE_RANK() OVER (ORDER BY count DESC) FROM bookings.aircrafts s1 INNER JOIN (SELECT DISTINCT aircraft_code, COUNT(*) OVER (partition BY aircraft_code) FROM bookings.seats) s2 ON s1.aircraft_code = s2.aircraft_code) s WHERE dense_rank = 1
